@@ -12,6 +12,8 @@ connectDB();
 
 // Middleware para parsear JSON
 app.use(express.json());
+// Configurar EJS cómo el motor de vistas
+app.set("view engine", "ejs");
 
 app.use("/api", routes);
 
