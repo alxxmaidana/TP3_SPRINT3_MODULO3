@@ -14,6 +14,9 @@ connectDB();
 app.use(express.json());
 // Configurar EJS cómo el motor de vistas
 app.set("view engine", "ejs");
+// Enlazar archivos estáticos (CSS) al servidor Express
+app.use(express.static("public"));
+
 
 app.use("/api", routes);
 

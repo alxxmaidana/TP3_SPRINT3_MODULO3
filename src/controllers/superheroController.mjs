@@ -43,8 +43,9 @@ export async function obtenerTodosLosSuperheroesController(_req, res) {
 				message: "No hay superhéroes, la colección se encuentra vacía"
 			})
 		}
-		const superheroesFormateados = renderizarlistaSuperheroes(superheroes);
-		res.status(200).json(superheroesFormateados);
+		// Pasamos el array de superhéroes para que la vista los renderize
+		res.render("dashboard", { superheroes });
+
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al obtener todos los superhéroes",
