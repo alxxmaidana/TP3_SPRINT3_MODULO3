@@ -94,14 +94,27 @@ export async function obtenerSuperheroesMayoresDe30Controller(_req, res) {
 }
 
 // AGREGAR NUEVO SUPERHÉROE
-export async function agregarNuevoSuperheroeController(req, res) {
+export async function agregarSuperheroeController(req, res) {
 	try {
-		// Crear nuevo superhéroe a partir de los datos enviados en el body (Enviamos un JSON desde postman)
-		const nuevoSuperheroe = new Superhero(req.body);
-		// Agregar superhéroe a la DB
+		// Obtener los datos del formuario del cuerpo de la petición
+		const { nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poderes, aliados, enemigos, creador } = req.body;
+		// Crear un nuevo superhéroe a partir del modelo Superhero
+		const nuevoSuperheroe = new Superhero({
+			nombreSuperheroe,
+			nombreReal,
+			edad,
+			planetaOrigen,
+			debilidad,
+			creador,
+			poderes: poderes ? poderes.split(",").map((p) => p.trim()) : [],
+			aliados: aliados ? aliados.split(",").map((a) => a.trim()) : [],
+			enemigos: enemigos ? enemigos.split(",").map((e) => e.trim()) : [],
+		});
+		
+		// Agregar el nuevo superhéroe
 		await agregarNuevoSuperheroe(nuevoSuperheroe);
-		const nuevoSuperheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
-		res.status(200).json(nuevoSuperheroeFormateado);
+		// Redireccionar al dashboard
+		res.redirect("/api/heroes");
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al agregar el nuevo superheroe",
