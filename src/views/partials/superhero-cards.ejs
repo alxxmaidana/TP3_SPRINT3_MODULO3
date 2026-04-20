@@ -1,71 +1,69 @@
-<div class="cards-grid">
-        <div class="superhero-card">
-            <div class="card__header">
-                <div class="header__avatar">
-                    <%= heroe.nombreSuperheroe.substring(0, 2).toUpperCase() %>
-                </div>
-                <div class="header__title">
-                    <h3>
-                        <%= heroe.nombreSuperheroe %>
-                    </h3>
-                    <p>
-                        <%= heroe.nombreReal %> · <%= heroe.edad %> Años
-                    </p>
-                </div>
-            </div>
-            <table class="card__table">
-                <tr class="label">
-                    <td>Planeta </td>
-                    <td>
-                        <%= heroe.planetaOrigen %>
-                    </td>
-                </tr>
-                <tr class="label">
-                    <td>Debilidad</td>
-                    <td>
-                        <%= heroe.debilidad %>
-                    </td>
-                </tr>
-                <tr class="label">
-                    <td>Poderes</td>
-                    <td>
-                        <% heroe.poderes.forEach((poder)=> { %>
-                            <span class="tag tag--blue">
-                                <%= poder %>
-                            </span>
-                            <% }) %>
-                    </td>
-                </tr>
-                <tr class="label">
-                    <td>Aliados</td>
-                    <td>
-                        <% heroe.aliados.forEach((aliado)=> { %>
-                            <span class="tag tag--green">
-                                <%= aliado %>
-                            </span>
-                            <% }); %>
-                    </td>
-                </tr>
-                <tr class="label">
-                    <td>Enemigos</td>
-                    <td>
-                        <% heroe.enemigos.forEach((enemigo)=> { %>
-                            <span class="tag tag--red">
-                                <%= enemigo %>
-                            </span>
-                            <% }); %>
-                    </td>
-                </tr>
-                <tr class="label">
-                    <td>Creador</td>
-                    <td>heroe.creador</td>
-                </tr>
-            </table>
-            <div class="card-actions">
-                <a href="/heroes/<%= heroe._id %>/editar" class="btn btn--edit">Editar</a>
-                <form action="/heroes/<%= heroe._id %>?_method=DELETE" method="DELETE">
-                    <button type="submit" class="btn btn--delete">Eliminar</button>
-                </form>
-            </div>
+<div class="superhero-card">
+    <div class="card__header">
+        <div class="header__avatar">
+            <%= heroe.nombreSuperheroe.substring(0, 2).toUpperCase() %>
         </div>
+        <div class="header__title">
+            <h3>
+                <%= heroe.nombreSuperheroe %>
+            </h3>
+            <p>
+                <%= heroe.nombreReal %> · <%= heroe.edad %> Años
+            </p>
+        </div>
+    </div>
+    <table class="card__table">
+        <tr class="label">
+            <td>Planeta </td>
+            <td>
+                <%= heroe.planetaOrigen %>
+            </td>
+        </tr>
+        <tr class="label">
+            <td>Debilidad</td>
+            <td>
+                <%= heroe.debilidad %>
+            </td>
+        </tr>
+        <tr class="label">
+            <td>Poderes</td>
+            <td>
+                <% heroe.poderes.forEach((poder)=> { %>
+                    <span class="tag tag--blue">
+                        <%= poder %>
+                    </span>
+                    <% }) %>
+            </td>
+        </tr>
+        <tr class="label">
+            <td>Aliados</td>
+            <td>
+                <% heroe.aliados.forEach((aliado)=> { %>
+                    <span class="tag tag--green">
+                        <%= aliado %>
+                    </span>
+                    <% }); %>
+            </td>
+        </tr>
+        <tr class="label">
+            <td>Enemigos</td>
+            <td>
+                <% heroe.enemigos.forEach((enemigo)=> { %>
+                    <span class="tag tag--red">
+                        <%= enemigo %>
+                    </span>
+                    <% }); %>
+            </td>
+        </tr>
+        <tr class="label">
+            <td>Creador</td>
+            <td>heroe.creador</td>
+        </tr>
+    </table>
+    <div class="card-actions">
+        <a href="/heroes/<%= heroe._id %>/editar" class="btn btn--edit">Editar</a>
+        <form action="/heroes/<%= heroe._id %>?_method=DELETE" method="DELETE">
+            <button type="submit" class="btn btn--delete">Eliminar</button>
+        </form>
+    </div>
 </div>
