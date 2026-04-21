@@ -3,28 +3,23 @@ import { body } from "express-validator";
 export const superheroValidationRules = () => [
 	// Validar nombreSuperheroe
 	body("nombreSuperheroe")
-		.isString()
-		.withMessage("El nombre del superhéroe debe ser un texto")
-		.trim() // Sanitizar que no tenga espacios en blanco al inicio/final
-		.notEmpty() // validar que no esté vacio
-		.withMessage("El nombre del Superhéroe es requerido.")
-		.isLength({ min: 3, max: 60 }) // validar minimo y máximo de carácteres
-		.withMessage(
-			"El nombre del Superhéroe debe tener entre 3 y 60 caracteres.",
-		),
+		.trim() // Eliminar espacios en blanco al inicio y al final
+		.custom((value) => { // Validar que el nombreSuperheroe no se solo números 
+			if (!isNaN(value)) { // Si el nombreSuperheroe no es un NaN, significa que se ingresó solo números
+				throw new Error("El nombre del Superhéroe no puede contener sólo números");
+			}
+			return true;
+		}),
+	// Validar nombre real del superhéroe
 	body("nombreReal")
-		.isString()
-		.withMessage("El nombre real del superhéroe debe ser un texto")
 		.trim()
-		.notEmpty()
-		.withMessage("El nombre real del Superhéroe es requerido.")
-		.isLength({ min: 3, max: 60 })
-		.withMessage(
-			"El nombre real del Superhéroe debe tener entre 3 y 60 caracteres.",
-		),
+		.custom((value) => { // Validar que el nombreReal no contenga números
+			if (/\d/.test(value)) {
+				throw new Error("El nombre real del superhéroe no puede contener números");
+			}
+			return true;
+		}),
 	body("edad")
-		.notEmpty()
-		.withMessage("La edad es requerida")
 		.isNumeric()
 		.withMessage("La edad deber ser un número")
 		.custom((value) => { // validar que se un número mayor a 0
@@ -35,8 +30,9 @@ export const superheroValidationRules = () => [
 		})
 		.trim(),
 	body("poderes")
-		.isArray({ min: 1 }) // Validar que el array no esté vacío
-		.withMessage("Los poderes del Superhéroe son requeridos."),
+		// .isArray({ min: 1 }) // Validar que el array no esté vacío
+		// .withMessage("Los poderes del Superhéroe son requeridos."),
+		,
 	body("poderes.*") // El asterisco aplica la regla a CADA elemento del array
 		.notEmpty()
 		.withMessage("Ningún poder puede quedar vacío.")

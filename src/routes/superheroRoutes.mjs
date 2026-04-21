@@ -24,7 +24,11 @@ router.get("/heroes/agregar", (_req, res) => {
 });
 
 // Ruta para procesar el formulario
-router.post("/heroes/agregar", agregarSuperheroeController);
+router.post(
+	"/heroes/agregar",
+	superheroValidationRules(),
+	handleValidationErrors,
+	agregarSuperheroeController);
 
 // Ruta para buscar y leer un superhéroe por _id
 router.get("/heroes/buscar/id/:id", obtenerSuperheroePorIdController);
