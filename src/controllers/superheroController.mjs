@@ -104,14 +104,12 @@ export async function agregarSuperheroeController(req, res) {
 			nombreReal,
 			edad,
 			planetaOrigen: planetaOrigen ? planetaOrigen : "Desconocido",
-			debilidad: debilidad ? debilidad : "Sin Debilidad",
+			debilidad: debilidad ? debilidad : "No especificado",
 			creador: creador ? creador : "Desconocido",
-			poderes: poderes.split(",").map(item => item.trim()),
-			aliados: aliados ? aliados.split(",").map(item => item.trim()) : [],
-			enemigos: enemigos ? enemigos.split(",").map(item => item.trim()) : [],
+			poderes,
+			aliados: aliados ? aliados : [],
+			enemigos: enemigos ? enemigos : [],
 		});
-
-		nuevoSuperheroe.poderes.forEach(poder => console.log(poder));
 		// Agregar el nuevo superhéroe
 		await agregarNuevoSuperheroe(nuevoSuperheroe);
 		// Redireccionar al dashboard

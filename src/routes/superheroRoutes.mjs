@@ -10,15 +10,16 @@ import {
 	obtenerTodosLosSuperheroesController,
 	agregarSuperheroeController
 } from "../controllers/superheroController.mjs";
-import { handleValidationErrors } from "../validations/errorMiddleware.mjs";
-import { superheroValidationRules } from "../validations/validationRules.mjs";
+import { handleValidationErrors } from "../middlewares/validations/errorMiddleware.mjs";
+import { superheroValidationRules } from "../middlewares/validations/validationRules.mjs";
+import { parseFieldsToArray } from "../middlewares/parseFieldsToArray.mjs";
 
 const router = Router();
 
 // Ruta dashboard para listar todos los superhéroes
 router.get("/heroes", obtenerTodosLosSuperheroesController);
 
-// Ruta GET para mostra el formulario
+// Ruta GET para mostrar el formulario
 router.get("/heroes/agregar", (_req, res) => {
 	res.render("addSuperhero"); // Renderiza el formulario
 });
@@ -26,9 +27,11 @@ router.get("/heroes/agregar", (_req, res) => {
 // Ruta para procesar el formulario
 router.post(
 	"/heroes/agregar",
+	parseFieldsToArray(["poderes", "aliados", "enemigos"]), // Parseamos los campos -> poderes, aliados y enemigos antes de aplicarle las validaciones
 	superheroValidationRules(),
 	handleValidationErrors,
-	agregarSuperheroeController);
+	agregarSuperheroeController
+);
 
 // Ruta para buscar y leer un superhéroe por _id
 router.get("/heroes/buscar/id/:id", obtenerSuperheroePorIdController);
