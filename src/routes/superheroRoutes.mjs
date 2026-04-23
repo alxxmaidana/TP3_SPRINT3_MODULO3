@@ -1,17 +1,17 @@
 import { Router } from "express";
 import {
 	actualizarSuperheroePorIdController,
-
+	agregarSuperheroeController,
 	buscarSuperheoresPorAtributoController,
 	eliminarSuperheroePorIdController,
 	eliminarSuperheroePorNombreController,
 	obtenerSuperheroePorIdController,
 	obtenerSuperheroesMayoresDe30Controller,
 	obtenerTodosLosSuperheroesController,
-	agregarSuperheroeController
 } from "../controllers/superheroController.mjs";
+
 import { handleValidationErrors } from "../middlewares/validations/errorMiddleware.mjs";
-import { superheroValidationRules } from "../middlewares/validations/validationRules.mjs";
+import { superheroValidations } from "../middlewares/validations/validationRules.mjs";
 import { parseFieldsToArray } from "../middlewares/parseFieldsToArray.mjs";
 
 const router = Router();
@@ -28,7 +28,7 @@ router.get("/heroes/agregar", (_req, res) => {
 router.post(
 	"/heroes/agregar",
 	parseFieldsToArray(["poderes", "aliados", "enemigos"]), // Parseamos los campos -> poderes, aliados y enemigos antes de aplicarle las validaciones
-	superheroValidationRules(),
+	superheroValidations,
 	handleValidationErrors,
 	agregarSuperheroeController
 );
@@ -48,7 +48,7 @@ router.get(
 // Agregar un nuevo superhéroe
 // router.post(
 // 	"/heroes",
-// 	superheroValidationRules(),
+// 	superheroValidations,
 // 	handleValidationErrors,
 // 	agregarSueperheroeController,
 // );
@@ -56,7 +56,7 @@ router.get(
 // Actualizar un superhéroe por su id
 router.put(
 	"/heroes/actualizar/:id",
-	superheroValidationRules(),
+	superheroValidations,
 	handleValidationErrors,
 	actualizarSuperheroePorIdController
 );
