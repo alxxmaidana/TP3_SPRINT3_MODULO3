@@ -29,6 +29,6 @@ export async function eliminarSuperheroePorId(id) {
 	return await SuperheroRepository.eliminarPorId(id);
 }
 // ACTUALIZAR SUPERHÉROE
-export async function actualizarSuperheroePorId(id, actualizacion) {
-	return await SuperheroRepository.actualizarSuperheroe(id, actualizacion);
+export async function actualizarSuperheroePorId(id, datosActualizados) {
+	return await SuperheroRepository.actualizarSuperheroe(id, datosActualizados);
 }

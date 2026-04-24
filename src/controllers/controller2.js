@@ -17,7 +17,13 @@ import {
 	renderizarSuperheroe,
 } from "../views/responseView.mjs";
 
-// OBTENER SUPERHÉROE POR ID
+
+
+
+
+/////////////////////////////////////
+// OBTENER SUPERHÉROE POR ID --> TP 2
+/////////////////////////////////////
 export async function obtenerSuperheroePorIdController(req, res) {
 	try {
 		const { id } = req.params;
@@ -29,25 +35,6 @@ export async function obtenerSuperheroePorIdController(req, res) {
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al buscar el superhéroe",
-			err: err.mesagge,
-		});
-	}
-}
-
-// OBTENER TODOS LOS SUPERHÉROES
-export async function obtenerTodosLosSuperheroesController(req, res) {
-	try {
-		const superheroes = await obtenerTodosLosSuperheroes();
-		if (superheroes === null) {
-			return res.status(404).send({
-				message: "No hay superhéroes, la colección se encuentra vacía"
-			})
-		}
-		// Pasamos el array de superhéroes para que la vista los renderize
-		res.render("dashboard", { superheroes });
-	} catch (err) {
-		res.status(500).send({
-			mesagge: "Error al obtener todos los superhéroes",
 			err: err.mesagge,
 		});
 	}
@@ -97,7 +84,6 @@ export async function agregarSuperheroeController(req, res) {
 	try {
 		// Destructuring para obtener los datos del cuerpo de la petición
 		// Asignamos valores por defecto para los campos no especificados en el formulario
-		// ...rest -> Agrupamos todos demás campo del req.body dentro del objeto rest
 		const {
 			planetaOrigen = "Desconocido",
 			debilidad = "No especificado",
@@ -171,6 +157,21 @@ export async function eliminarSuperheroePorIdController(req, res) {
 		res.status(500).send({
 			mesagge: "Error al elminar el superhéroe",
 			err: err.mesagge,
+		});
+	}
+}
+
+export async function actualizarSuperheroePorIdController(req, res) {
+	try {
+		const { id } = req.params;
+		const superheroeActualizado = await actualizarSuperheroePorId(id, req.body);
+		if (!superheroeActualizado) {
+			return re
+		}
+	} catch (error) {
+		res.status(500).send({
+			message: "Error al actualizar el superhéroe",
+			err: err.message
 		});
 	}
 }

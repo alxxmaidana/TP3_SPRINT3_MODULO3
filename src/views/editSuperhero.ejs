@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Superhéroe</title>
+</head>
+
+<body>
+    <form action="/api/heroes/<%= superheroe.id %>/editar?_method=PUT" method="POST" autocomplete="off">
+        <!-- Simular un método PUT con usando un campo oculto, el atributo el nombre _method es esencial para que el method-verride funcione -->
+        <input type="hidden" name="_method" value="PUT">
+
+        <%- include("./partials/superheroForm.ejs", { superheroe }) %>
+
+            <div class="btn-row">
+                <a href="/api/heroes?_method=GET" class="btn-secondary">Cancelar</a>
+                <button type="submit" class="btn-primary">Guardar cambios</button>
+            </div>
+    </form>
+</body>
+
+</html>

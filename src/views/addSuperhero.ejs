@@ -7,7 +7,7 @@
     <title>Agregar nuevo Superhéroe</title>
 
     <style>
-        body {Ñ
+        body {
             background-color: #1F1F1E;
             color: whitesmoke;
         }
@@ -20,79 +20,14 @@
         <p class="form-hint">Los campos con <span class="req">*</span> son obligatorios</p>
 
         <form action="/api/heroes/agregar" method="POST" autocomplete="off">
-
-            <!-- Identidad -->
-            <fieldset>
-                <legend>Identidad</legend>
-
-                <div class="grid-2">
-                    <div class="field">
-                        <label for="nombreSuperheroe">Nombre de superhéroe *</label>
-                        <input type="text" id="nombreSuperheroe" name="nombreSuperheroe" placeholder="Ej. Spider-Man"
-                            required minlength="3" maxlength="60"/>
-                    </div>
-                    <div class="field">
-                        <label for="nombreReal">Nombre real *</label>
-                        <input type="text" id="nombreReal" name="nombreReal" placeholder="Ej. Peter Parker" required minlength="3" maxlength="60"/>
-                    </div>
+            <%- include("partials/superheroForm.ejs", { superheroe: { nombreSuperheroe: '' , nombreReal: '' , edad: '' ,
+                planetaOrigen: '' , creador: '' , debilidad: '' , poderes: '' , aliados: '' , enemigos: '' } }) %>
+                <div class="btn-row">
+                    <a href="/api/heroes?_method=GET" class="btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn-primary">Guardar</button>
                 </div>
-
-                <div class="grid-2">
-                    <div class="field">
-                        <label for="edad">Edad</label>
-                        <input type="number" id="edad" name="edad" placeholder="Ej. 17" min="0" step="0.1" required/>
-                    </div>
-                    <div class="field">
-                        <label for="planetaOrigen">Planeta de origen</label>
-                        <input type="text" id="planetaOrigen" name="planetaOrigen" placeholder="Tierra" />
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label for="creador">Creador</label>
-                    <input type="text" id="creador" name="creador" placeholder="Ej. Stan Lee" />
-                </div>
-            </fieldset>
-
-            <!-- Habilidades -->
-            <fieldset>
-                <legend>Habilidades y debilidades</legend>
-
-                <div class="field">
-                    <label for="debilidad">Debilidad</label>
-                    <input type="text" id="debilidad" name="debilidad" placeholder="Ej. Kryptonita" />
-                </div>
-
-                <div class="field">
-                    <label for="poderes">Poderes</label>
-                    <input type="text" id="poderes" name="poderes" placeholder="Ej. Vuelo, Superfuerza, Visión láser" required />
-                    <small>Separa cada poder con una coma</small>
-                </div>
-            </fieldset>
-
-            <!-- Relaciones -->
-            <fieldset>
-                <legend>Relaciones</legend>
-
-                <div class="field">
-                    <label for="aliados">Aliados</label>
-                    <input type="text" id="aliados" name="aliados" placeholder="Ej. Iron Man, Thor, Hulk" />
-                    <small>Separa cada aliado con una coma</small>
-                </div>
-
-                <div class="field">
-                    <label for="enemigos">Enemigos</label>
-                    <input type="text" id="enemigos" name="enemigos" placeholder="Ej. Thanos, Loki" />
-                    <small>Separa cada enemigo con una coma</small>
-                </div>
-            </fieldset>
-
-            <div class="btn-row">
-                <a href="/api/heroes" class="btn-secondary">Cancelar</a>
-                <button type="submit" class="btn-primary">Guardar superhéroe</button>
-            </div>
-
         </form>
+
     </div>
 </body>
 
