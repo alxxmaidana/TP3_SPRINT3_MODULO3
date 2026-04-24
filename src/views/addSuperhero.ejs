@@ -1,34 +1,97 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="bg-neutral-950 text-neutral-100">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar nuevo Superhéroe</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <title>Nuevo Superhéroe</title>
 
     <style>
-        body {
-            background-color: #1F1F1E;
-            color: whitesmoke;
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+
+        .form-container {
+            max-width: 800px;
+            margin: auto;
+            background: #171717;
+            border: 1px solid #262626;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
         }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(37,99,235,0.6);
+        }
+
+        .btn-secondary {
+            background: #262626;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .form-hint {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .req { color: #ef4444; }
     </style>
 </head>
 
-<body>
+<body class="p-6">
+
     <div class="form-container">
-        <h2>Nuevo superhéroe</h2>
-        <p class="form-hint">Los campos con <span class="req">*</span> son obligatorios</p>
+
+        <h2 class="text-3xl text-blue-500 mb-2">Nuevo héroe</h2>
+        <p class="form-hint">Campos obligatorios <span class="req">*</span></p>
 
         <form action="/api/heroes/agregar" method="POST" autocomplete="off">
-            <%- include("partials/superheroForm.ejs", { superheroe: { nombreSuperheroe: '' , nombreReal: '' , edad: '' ,
-                planetaOrigen: '' , creador: '' , debilidad: '' , poderes: '' , aliados: '' , enemigos: '' } }) %>
-                <div class="btn-row">
-                    <a href="/api/heroes?_method=GET" class="btn-secondary">Cancelar</a>
-                    <button type="submit" class="btn-primary">Guardar</button>
-                </div>
+
+            <%- include("partials/superheroForm.ejs", {
+                superheroe: {
+                    nombreSuperheroe: '',
+                    nombreReal: '',
+                    edad: '',
+                    planetaOrigen: '',
+                    creador: '',
+                    debilidad: '',
+                    poderes: '',
+                    aliados: '',
+                    enemigos: ''
+                }
+            }) %>
+
+            <div class="btn-row">
+                <a href="/api/heroes?_method=GET" class="btn-secondary">Cancelar</a>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </div>
+
         </form>
 
     </div>
-</body>
 
+</body>
 </html>

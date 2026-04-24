@@ -1,75 +1,67 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="bg-neutral-950 text-neutral-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de superhéroes</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <title>Superhéroes</title>
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --clr-background: #1F1F1E;
-            --clr-text: #F4F3EF;
-            --clr-card: #30302E;
-            --border-color: #4A4A46;
-            --line-clr: #4A4A46;
-        }
-
         body {
-            background-color: var(--clr-background);
-            color: var(--clr-text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
         }
 
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-            padding: 1rem;
+            gap: 2rem;
         }
 
-        .superhero-card {
-            background-color: var(--clr-card);
-            border: 1px solid var(--border-color);
-            padding: 1rem;
-            border-radius: 10px;
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: 0.2s;
         }
 
-        .card__header {
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            display: flex;
-        }
-
-        .header__avatar {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #253E5F;
-            color: #7CA5D8;
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(37,99,235,0.7);
         }
     </style>
 </head>
-<body>
-    <header class="dashboard-header">
-        <h1>Trabajo Práctico Nro 3 - Sprint 3</h1>
-    </header>
 
-    <form action="/api/heroes/agregar" method="GET">
-        <button type="submit" class="btn-primary">+ Agregar superhéroe</button>
-    </form>
+<body class="px-6 py-8">
+
+    <header class="mb-10 flex justify-between items-center border-b border-neutral-800 pb-4">
+        <div>
+            <h1 class="text-4xl text-blue-500">Heroes Database</h1>
+            <p class="text-neutral-400 text-sm">Panel de control</p>
+        </div>
+
+        <form action="/api/heroes/agregar" method="GET">
+            <button type="submit" class="btn-primary">
+                + Nuevo héroe
+            </button>
+        </form>
+    </header>
 
     <div class="cards-grid">
         <% superheroes.forEach(heroe => { %>
-            <%- include("./partials/superhero-cards.ejs", { heroe }) %>
+            <%- include("./partials/superheroCards.ejs", { heroe }) %>
         <% }); %>
     </div>
-</body>
 
-</html>
+</body>

@@ -1,24 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="bg-neutral-950 text-neutral-100">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
     <title>Editar Superhéroe</title>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2 { font-family: 'Bebas Neue', sans-serif; }
+
+        .form-container {
+            max-width: 800px;
+            margin: auto;
+            background: #171717;
+            border: 1px solid #262626;
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            background: #262626;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 
-<body>
-    <form action="/api/heroes/<%= superheroe.id %>/editar?_method=PUT" method="POST" autocomplete="off">
-        <!-- Simular un método PUT con usando un campo oculto, el atributo el nombre _method es esencial para que el method-verride funcione -->
-        <input type="hidden" name="_method" value="PUT">
+<body class="p-6">
 
-        <%- include("./partials/superheroForm.ejs", { superheroe }) %>
+    <div class="form-container">
+
+        <h2 class="text-3xl text-blue-500 mb-4">Editar héroe</h2>
+
+        <form action="/api/heroes/<%= superheroe.id %>/editar?_method=PUT" method="POST" autocomplete="off">
+
+            <input type="hidden" name="_method" value="PUT">
+
+            <%- include("./partials/superheroForm.ejs", { superheroe }) %>
 
             <div class="btn-row">
                 <a href="/api/heroes?_method=GET" class="btn-secondary">Cancelar</a>
                 <button type="submit" class="btn-primary">Guardar cambios</button>
             </div>
-    </form>
-</body>
 
+        </form>
+
+    </div>
+
+</body>
 </html>
