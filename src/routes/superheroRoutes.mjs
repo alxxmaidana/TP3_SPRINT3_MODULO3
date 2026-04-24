@@ -8,6 +8,8 @@ import {
 	obtenerSuperheroePorIdController,
 	obtenerSuperheroesMayoresDe30Controller,
 	obtenerTodosLosSuperheroesController,
+	editarSuperheroeController,
+	eliminarSuperheroeController
 } from "../controllers/superheroController.mjs";
 
 import { handleValidationErrors } from "../middlewares/validations/errorMiddleware.mjs";
@@ -46,8 +48,11 @@ router.put(
 	parseFieldsToArray(["poderes", "aliados", "enemigos"]),
 	superheroValidations,
 	handleValidationErrors,
-	actualizarSuperheroePorIdController
+	editarSuperheroeController
 );
+
+// Ruta DELETE para elimnar un superhéroe por su id
+router.delete("/heroes/:id", eliminarSuperheroeController);
 
 // Ruta para buscar y leer un superhéroe por _id
 router.get("/heroes/buscar/id/:id", obtenerSuperheroePorIdController);

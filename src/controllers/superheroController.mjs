@@ -38,7 +38,7 @@ export async function obtenerSuperheroePorIdController(req, res) {
 export async function obtenerTodosLosSuperheroesController(req, res) {
 	try {
 		const superheroes = await obtenerTodosLosSuperheroes();
-		if (superheroes === null) {
+		if (!superheroes) {
 			return res.status(404).send({
 				message: "No hay superhéroes, la colección se encuentra vacía"
 			})
@@ -93,6 +93,23 @@ export async function obtenerSuperheroesMayoresDe30Controller(_req, res) {
 }
 
 // AGREGAR NUEVO SUPERHÉROE
+export async function agregarNuevoSuperheroeController(req, res) {
+	try {
+		// Crear nuevo superhéroe a partir de los datos enviados en el body (Enviamos un JSON desde postman)
+		const nuevoSuperheroe = new Superhero(req.body);
+		// Agregar superhéroe a la DB
+		await agregarNuevoSuperheroe(nuevoSuperheroe);
+		const nuevoSuperheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
+		res.status(200).json(nuevoSuperheroeFormateado);
+	} catch (err) {
+		res.status(500).send({
+			mesagge: "Error al agregar el nuevo superheroe",
+			err: err.mesagge,
+		});
+	}
+}
+
+// AGREGAR NUEVO SUPERHÉROE
 export async function agregarSuperheroeController(req, res) {
 	try {
 		// Destructuring para obtener los datos del cuerpo de la petición
@@ -130,6 +147,34 @@ export async function agregarSuperheroeController(req, res) {
 		res.status(500).send({
 			mesagge: "Error al agregar el nuevo superheroe",
 			err: err.mesagge,
+		});
+	}
+}
+
+
+// ACTUALIZAR SUPERHÉROE POR ID
+export async function editarSuperheroeController(req, res) {
+	try {
+		const { id } = req.params;
+		await actualizarSuperheroePorId(id, req.body);
+		res.redirect("/api/heroes");
+	} catch (err) {
+		res.status(500).send({
+			mesagge: "Error al actualizar el superhéroe",
+			err: err.mesagge,
+		});
+	}
+}
+
+// ELIMINAR SUPERHÉROE
+export async function eliminarSuperheroeController(req, res) {
+	try {
+		await eliminarSuperheroePorId(req.params.id);
+		res.redirect("/api/heroes");
+	} catch (error) {
+		res.status(500).send({
+			message: "Ocurrió un error al eliminar el Superhéroe",
+			error: error.message,
 		});
 	}
 }
@@ -175,12 +220,20 @@ export async function eliminarSuperheroePorIdController(req, res) {
 	}
 }
 
+
 // ACTUALIZAR SUPERHÉROE POR ID
 export async function actualizarSuperheroePorIdController(req, res) {
 	try {
 		const { id } = req.params;
-		await actualizarSuperheroePorId(id, req.body);
-		res.redirect("/api/heroes");
+		const superheroeEncotrado = await actualizarSuperheroePorId(id, req.body);
+		// Verificar si se encontró el superheroe
+		if (superheroeEncotrado === null) {
+			return res.status(404).send({
+				mesagge: "No se encontró el superhéroe, no se pudo actualizar",
+			});
+		}
+		const superheroeFormateado = renderizarSuperheroe(superheroeEncotrado);
+		res.status(200).json(superheroeFormateado);
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al actualizar el superhéroe",

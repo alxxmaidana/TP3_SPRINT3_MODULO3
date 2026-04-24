@@ -62,8 +62,9 @@
     </table>
     <div class="card-actions">
         <a href="/api/heroes/<%= heroe._id %>/editar?_method=GET" class="btn btn--edit">Editar</a>
-        <form action="api/heroes/<%= heroe._id %>" method="GET">
-            <button type="submit" class="btn btn--delete">Eliminar</button>
+        <form action="/api/heroes/<%= heroe._id %>?_method=DELETE" method="POST">
+            <input type="hidden" name="?_method" value="DELETE">
+            <button id="btn-delete" type="submit" class="btn btn--delete">Eliminar</button>
         </form>
     </div>
 </div>
