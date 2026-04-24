@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import { obtenerTodosLosSuperheroes } from "../../services/superheroService.mjs";
 
 export const superheroValidations = [
   // nombreSuperheroe
@@ -26,12 +27,17 @@ export const superheroValidations = [
     })
     .escape(),
   body("poderes")
-    .isArray({ min: 1 }).withMessage("Los poderes son requeridos.")// Valida que poderes tenga almenos un elemento
-    .isString().withMessage("Todos los poderes deben ser un texto"), // Que sea array de strings
+    .isArray({ min: 1 }).withMessage("Los poderes son requeridos."), // Valida que poderes tenga almenos un elemento
   body("poderes.*")
     .trim()
     .isLength({ min: 3 }).withMessage("Cada poder debe tener al menos 3 caracteres.")
     .isLength({ max: 60 }).withMessage("Cada poder no puede superar los 60 caracteres.")
+    .custom((value) =>  {
+      if (/^[^\w\s]+$/.test(value) || /^\d+$/.test(value)) {
+        throw new Error("Cada poder deber ser un texto");
+      }
+      return true;
+    })
     .escape(),
 
   // Validaciones para los campos opcionales
@@ -53,22 +59,28 @@ export const superheroValidations = [
     .isLength({ min: 3 }).withMessage("El creador debe tener almenos 3 carácteres.")
     .isLength({ max: 60 }).withMessage("El creador no puede superar los 60 caracteres.")
     .escape(),
-   body("aliados")
-    .optional()
-    .isString().withMessage("Cada aliados debe ser un texto"),
   body("aliados.*")
     .optional()
     .trim()
     .isLength({ min: 3 }).withMessage("Cada aliado debe tener al menos 3 caracteres.")
     .isLength({ max: 60 }).withMessage("Cada aliado no puede superar los 60 caracteres.")
+    .custom((value) =>  {
+      if (/^[^\w\s]+$/.test(value) || /^\d+$/.test(value)) {
+        throw new Error("Cada aliado deber ser un texto");
+      }
+      return true;
+    })
     .escape(),
-  body("enemigos")
-    .optional()
-    .isString().withMessage("Cada enemigo debe ser un texto"),
   body("enemigos.*")
     .optional()
     .trim()
     .isLength({ min: 3 }).withMessage("Cada enemigo debe tener al menos 3 caracteres.")
     .isLength({ max: 60 }).withMessage("Cada enemigo no puede superar los 60 caracteres.")
+    .custom((value) =>  {
+      if (/^[^\w\s]+$/.test(value) || /^\d+$/.test(value)) {
+        throw new Error("Cada enemigo deber ser un texto");
+      }
+      return true;
+    })
     .escape(),
   ];

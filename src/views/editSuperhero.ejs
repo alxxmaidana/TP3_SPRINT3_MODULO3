@@ -54,12 +54,10 @@
 
         <form action="/api/heroes/<%= superheroe.id %>/editar?_method=PUT" method="POST" autocomplete="off">
 
-            <input type="hidden" name="_method" value="PUT">
-
             <%- include("./partials/superheroForm.ejs", { superheroe }) %>
 
             <div class="btn-row">
-                <button type="submit" href="/api/heroes?_method=GET" class="btn-secondary">Cancelar</button>
+                <button type="submit" href="/api/heroes" class="btn-secondary">Cancelar</button>
                 <button type="submit" class="btn-primary">Guardar cambios</button>
             </div>
 
