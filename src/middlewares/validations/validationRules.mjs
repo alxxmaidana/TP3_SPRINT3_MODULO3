@@ -41,7 +41,7 @@ export const superheroValidations = [
     .escape(),
 
   // Validaciones para los campos opcionales
-  body("planetaOrgen")
+  body("planetaOrigen")
     .optional()
     .trim()
     .isLength({ min: 3 }).withMessage("El planeta de origen debe tener al menos 3 caracteres.")
