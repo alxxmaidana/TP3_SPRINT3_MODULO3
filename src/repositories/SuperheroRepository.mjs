@@ -41,7 +41,7 @@ class SuperheroRepository extends IRepository {
 		return await Superhero.findOneAndDelete({
 			nombreSuperheroe: nombreSuperheroe,
 		});
-		// findOneAndDelete() retorna el documento eliminado
+		// Retorna el documento eliminado 
 	}
 
 	// ELIMINAR SUPERHÉROE POR ID
@@ -51,7 +51,9 @@ class SuperheroRepository extends IRepository {
 
 	// ACTUALIZAR SUPERHÉROE
 	async actualizarSuperheroe(id, datosActualizados) {
-		return await Superhero.findByIdAndUpdate(id, datosActualizados);
+		return await Superhero.findByIdAndUpdate(id, datosActualizados, {
+			returnDocument: "after" // Retorna el documento despues de la actualización
+		});
 	}
 }
 

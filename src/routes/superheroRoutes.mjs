@@ -9,7 +9,8 @@ import {
 	obtenerSuperheroesMayoresDe30Controller,
 	obtenerTodosLosSuperheroesController,
 	editarSuperheroeController,
-	eliminarSuperheroeController
+	eliminarSuperheroeController,
+	agregarNuevoSuperheroeController
 } from "../controllers/superheroController.mjs";
 
 import { handleValidationErrors } from "../middlewares/validations/errorMiddleware.mjs";
@@ -19,7 +20,7 @@ import { parse } from "dotenv";
 
 const router = Router();
 
-// Ruta dashboard para listar todos los superhéroes
+// Enpoint para obtener todos los superhéroes -> Obitiene todos los superhéroes y los renderiza en el Dashboard
 router.get("/heroes",obtenerTodosLosSuperheroesController);
 
 // Ruta GET para mostrar el formulario de agregar superhéroe
@@ -66,15 +67,15 @@ router.get(
 	buscarSuperheoresPorAtributoController,
 );
 
-// Agregar un nuevo superhéroe
-// router.post(
-// 	"/heroes",
-// 	superheroValidations,
-// 	handleValidationErrors,
-// 	agregarSueperheroeController,
-// );
+// Endpoint para agregar un nuevo superhéroe TP1
+router.post(
+	"/heroes",
+	superheroValidations,
+	handleValidationErrors,
+	agregarNuevoSuperheroeController,
+);
 
-// Actualizar un superhéroe por su id
+// Actualizar superhéroe por ID
 router.put(
 	"/heroes/actualizar/:id",
 	superheroValidations,
@@ -84,11 +85,11 @@ router.put(
 
 // Ruta para eliminar un superheroe por su nombre de superhéroe
 router.delete(
-	"/heroes/eliminar/:nombreSuperheroe",
+	"/heroes/eliminar/nombreSuperheroe/:nombreSuperheroe",
 	eliminarSuperheroePorNombreController,
 );
 
 // Eliminar un superhéroe por id
-router.delete("/heroes/eliminar/id/:id", eliminarSuperheroePorIdController);
+router.delete("/heroes/eliminar/:id", eliminarSuperheroePorIdController);
 
 export default router;
