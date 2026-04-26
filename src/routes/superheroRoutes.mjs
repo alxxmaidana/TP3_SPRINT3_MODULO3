@@ -20,7 +20,7 @@ import { parse } from "dotenv";
 
 const router = Router();
 
-// Enpoint para obtener todos los superhéroes -> Obitiene todos los superhéroes y los renderiza en el Dashboard
+// Endpoint para obtener todos los superhéroes -> Obitiene todos los superhéroes y los renderiza en el Dashboard
 router.get("/heroes",obtenerTodosLosSuperheroesController);
 
 // Ruta GET para mostrar el formulario de agregar superhéroe
@@ -31,9 +31,6 @@ router.get("/heroes/agregar", (_req, res) => {
 // Ruta para procesar el formulario
 router.post(
 	"/heroes/agregar",
-	// Parseamos los campos de strings a arrays (poderes, aliados y enemigos) 
-	parseFieldsToArray(["poderes", "aliados", "enemigos"]),
-	// Validamos los campos requeridos (nombreSuperheroe, nombreReal, edad  y poderes)
 	superheroValidations,
 	handleValidationErrors,
 	agregarSuperheroeController
