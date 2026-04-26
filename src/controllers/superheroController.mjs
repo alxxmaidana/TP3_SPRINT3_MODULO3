@@ -101,7 +101,6 @@ export async function agregarNuevoSuperheroeController(req, res) {
 	try {
 		// Crear nuevo superhéroe a partir de los datos enviados en el body (Enviamos un JSON desde postman)
 		const nuevoSuperheroe = new Superhero(req.body);
-		// Agregar superhéroe a la DB
 		await agregarNuevoSuperheroe(nuevoSuperheroe);
 		const nuevoSuperheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
 		res.status(200).json(nuevoSuperheroeFormateado);
@@ -116,12 +115,9 @@ export async function agregarNuevoSuperheroeController(req, res) {
 // AGREGAR NUEVO SUPERHÉROE
 export async function agregarSuperheroeController(req, res) {
 	try {
-		// Crear objeto superhéroe apartir del modelo con los datos del body
 		const nuevoSuperheroe = new Superhero(req.body);
 		await agregarNuevoSuperheroe(nuevoSuperheroe)
 		res.status(200).json({redirectTo: "/api/heroes"});
-		//
-		//res.status(200).redirect("dashboard");
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al agregar el nuevo superheroe",
