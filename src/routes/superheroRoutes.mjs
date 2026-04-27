@@ -15,20 +15,31 @@ import {
 
 import { handleValidationErrors } from "../middlewares/validations/errorMiddleware.mjs";
 import { superheroValidations } from "../middlewares/validations/validationRules.mjs";
-import { parseFieldsToArray } from "../middlewares/parseFieldsToArray.mjs";
-import { parse } from "dotenv";
 
 const router = Router();
 
-// Endpoint para obtener todos los superhéroes -> Obitiene todos los superhéroes y los renderiza en el Dashboard
+///////////////////////////////////
+// Rutas para renderizar las vistas 
+///////////////////////////////////
+
+// Obtener todos los superhéroes y renderizarlos
 router.get("/heroes",obtenerTodosLosSuperheroesController);
 
-// Ruta GET para mostrar el formulario de agregar superhéroe
+// Renderizar formulario para agregar superheroe
 router.get("/heroes/agregar", (_req, res) => {
 	res.render("addSuperhero"); // Renderiza el formulario
 });
 
-// Ruta para procesar el formulario
+// Ruta para renderizar el formulario de edición y precargar los datos del superhéroe a editar
+// Busca el superhéroe por su atributo id, y se lo pasamos a la vista (editSuperhero.ejs) para que precargue los datos del superhéroe 
+router.get("/heroes/:id/editar", obtenerSuperheroePorIdController);
+
+
+////////////////////////////
+// Rutas Backend
+////////////////////////////
+
+// Ruta para agregar un superheroe
 router.post(
 	"/heroes/agregar",
 	superheroValidations,
@@ -36,14 +47,9 @@ router.post(
 	agregarSuperheroeController
 );
 
-// Ruta para renderizar el formulario de edición y precargar los datos del superhéroe a editar
-// Busca el superhéroe por su atributo id, y se lo pasamos a la vista (editSuperhero.ejs) para que precargue los datos del superhéroe 
-router.get("/heroes/:id/editar", obtenerSuperheroePorIdController);
-
-// Ruta PUT para actualizar el superhéroe
+// Ruta para editar un superhéroe
 router.put(
 	"/heroes/:id/editar",
-	parseFieldsToArray(["poderes", "aliados", "enemigos"]),
 	superheroValidations,
 	handleValidationErrors,
 	editarSuperheroeController
@@ -51,6 +57,10 @@ router.put(
 
 // Ruta DELETE para elimnar un superhéroe por su id
 router.delete("/heroes/:id", eliminarSuperheroeController);
+
+////////////////////////////////
+// Rutas de TPS enteriores
+///////////////////////////
 
 // Ruta para buscar y leer un superhéroe por _id
 router.get("/heroes/buscar/id/:id", obtenerSuperheroePorIdController);

@@ -132,7 +132,7 @@ export async function editarSuperheroeController(req, res) {
 	try {
 		const { id } = req.params;
 		await actualizarSuperheroePorId(id, req.body);
-		res.redirect("/api/heroes");
+		res.status(200).json({ redirectTo: "/api/heroes" });
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al actualizar el superhéroe",
@@ -145,7 +145,7 @@ export async function editarSuperheroeController(req, res) {
 export async function eliminarSuperheroeController(req, res) {
 	try {
 		await eliminarSuperheroePorId(req.params.id);
-		res.redirect("/api/heroes");
+		res.status(204).send(); 
 	} catch (error) {
 		res.status(500).send({
 			message: "Ocurrió un error al eliminar el Superhéroe",

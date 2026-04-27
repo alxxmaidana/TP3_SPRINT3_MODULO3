@@ -17,21 +17,27 @@
 
         <div class="flex justify-between border-b border-neutral-800 pb-1">
             <span class="text-neutral-500 mr-3">Planeta</span>
-            <span><%= heroe.planetaOrigen %></span>
+            <span>
+                <%= heroe.planetaOrigen %>
+            </span>
         </div>
 
         <div class="flex justify-between border-b border-neutral-800 pb-1">
             <span class="text-neutral-500 mr-3">Debilidad</span>
-            <span><%= heroe.debilidad %></span>
+            <span>
+                <%= heroe.debilidad %>
+            </span>
         </div>
 
         <!-- PODERES -->
         <div>
             <p class="text-neutral-500 mb-1">Poderes</p>
             <div class="flex flex-wrap gap-2">
-                <% heroe.poderes.forEach(poder => { %>
-                    <span class="tag tag-blue"><%= poder %></span>
-                <% }) %>
+                <% heroe.poderes.forEach(poder=> { %>
+                    <span class="tag tag-blue">
+                        <%= poder %>
+                    </span>
+                    <% }) %>
             </div>
         </div>
 
@@ -39,9 +45,11 @@
         <div>
             <p class="text-neutral-500 mb-1">Aliados</p>
             <div class="flex flex-wrap gap-2">
-                <% heroe.aliados.forEach(aliado => { %>
-                    <span class="tag tag-green"><%= aliado %></span>
-                <% }) %>
+                <% heroe.aliados.forEach(aliado=> { %>
+                    <span class="tag tag-green">
+                        <%= aliado %>
+                    </span>
+                    <% }) %>
             </div>
         </div>
 
@@ -49,30 +57,30 @@
         <div>
             <p class="text-neutral-500 mb-1">Enemigos</p>
             <div class="flex flex-wrap gap-2">
-                <% heroe.enemigos.forEach(enemigo => { %>
-                    <span class="tag tag-red"><%= enemigo %></span>
-                <% }) %>
+                <% heroe.enemigos.forEach(enemigo=> { %>
+                    <span class="tag tag-red">
+                        <%= enemigo %>
+                    </span>
+                    <% }) %>
             </div>
         </div>
 
         <div class="flex justify-between border-t border-neutral-800 pt-2 mt-2">
             <span class="text-neutral-500">Creador</span>
-            <span><%= heroe.creador %></span>
+            <span>
+                <%= heroe.creador %>
+            </span>
         </div>
     </div>
 
     <!-- ACTIONS -->
     <div class="flex justify-between mt-5 gap-2">
-        <a href="/api/heroes/<%= heroe._id %>/editar"
-           class="btn-edit w-full text-center">
-           Editar
+        <a href="/api/heroes/<%= heroe._id %>/editar" class="btn-edit w-full text-center">
+            Editar
         </a>
-
-        <form action="/api/heroes/<%= heroe._id %>?_method=DELETE" method="POST" class="w-full" onsubmit="return confirm('¿Seguro que quieres eliminar este Superhéroe?');">
-            <button type="submit" class="btn-delete w-full">
-                Eliminar
-            </button>
-        </form>
+        <button onclick="eliminarSuperheroe('<%= heroe.id %>')" type="submit" class="btn-delete w-full">
+            Eliminar
+        </button>
     </div>
 
 </div>
@@ -86,17 +94,17 @@
     }
 
     .tag-blue {
-        background: rgba(37,99,235,0.15);
+        background: rgba(37, 99, 235, 0.15);
         color: #60a5fa;
     }
 
     .tag-green {
-        background: rgba(34,197,94,0.15);
+        background: rgba(34, 197, 94, 0.15);
         color: #4ade80;
     }
 
     .tag-red {
-        background: rgba(239,68,68,0.15);
+        background: rgba(239, 68, 68, 0.15);
         color: #f87171;
     }
 
@@ -110,7 +118,7 @@
 
     .btn-edit:hover {
         background: #2563eb;
-        box-shadow: 0 0 8px rgba(37,99,235,0.6);
+        box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
     }
 
     .btn-delete {
@@ -123,6 +131,6 @@
 
     .btn-delete:hover {
         background: #dc2626;
-        box-shadow: 0 0 8px rgba(239,68,68,0.6);
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
     }
 </style>

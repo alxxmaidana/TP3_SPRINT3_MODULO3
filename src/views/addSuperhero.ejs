@@ -140,14 +140,18 @@
 
                 if (poderes.length < 1) {
                     errors.push("El campo poderes no puede quedar vacío");
-                } else if (poderes.some(poder => !isNaN(poder))) {
-                    errors.push("Cada poder deber ser un texto");
-                } else if (poderes.some(poder => poder.length < 3)) {
-                    errors.push("Cada poder debe tener almenos 3 caracteres");
-                } else if (poderes.some(poder => poder.length > 60)) {
-                    errors.push("Ningún poder puede superar los 60 caracteres");
+                } else {
+                    poderes.forEach(poder => {
+                        if (!isNaN(poder)) { // Validar que cada elemento se uns string 
+                            errors.push("Cada poder deber ser un texto");
+                        } else if (poder.length < 3) {
+                            errors.push("Cada poder debe tener almenos 3 caracteres");
+                        } else if (poder.length > 60) {
+                            errors.push("Ningún poder puede superar los 60 caracteres");
+                        }
+                    });
                 }
-
+                
                 // Si hubo errores de validación mostrar los errores con un alert
                 if (errors.length > 0) {
                     alert(errors.join("\n"));
