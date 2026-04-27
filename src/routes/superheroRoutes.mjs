@@ -25,9 +25,9 @@ const router = Router();
 // Obtener todos los superhéroes y renderizarlos
 router.get("/heroes",obtenerTodosLosSuperheroesController);
 
-// Renderizar formulario para agregar superheroe
+// Renderizar formulario para agregar superheroes
 router.get("/heroes/agregar", (_req, res) => {
-	res.render("addSuperhero"); // Renderiza el formulario
+	res.render("addSuperhero");
 });
 
 // Ruta para renderizar el formulario de edición y precargar los datos del superhéroe a editar
@@ -59,7 +59,7 @@ router.put(
 router.delete("/heroes/:id", eliminarSuperheroeController);
 
 ////////////////////////////////
-// Rutas de TPS enteriores
+// Rutas de TPs enteriores
 ///////////////////////////
 
 // Ruta para buscar y leer un superhéroe por _id
@@ -74,7 +74,7 @@ router.get(
 	buscarSuperheoresPorAtributoController,
 );
 
-// Endpoint para agregar un nuevo superhéroe TP1
+// agregar un nuevo superhéroe
 router.post(
 	"/heroes",
 	superheroValidations,

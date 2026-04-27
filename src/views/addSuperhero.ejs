@@ -24,18 +24,18 @@
         }
 
         .form-container {
-            max-width: 800px;
+            max-width: 750px;
             margin: auto;
             background: #171717;
             border: 1px solid #262626;
-            padding: 2rem;
+            padding: 1rem 2rem;
             border-radius: 1rem;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            padding: 0.6rem 1.2rem;
+            padding: 0.4rem .8rem;
             border-radius: 0.5rem;
             font-weight: 600;
             transition: 0.2s;
@@ -48,7 +48,7 @@
 
         .btn-secondary {
             background: #262626;
-            padding: 0.6rem 1.2rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 0.5rem;
         }
 
@@ -56,13 +56,13 @@
             display: flex;
             justify-content: flex-end;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         .form-hint {
             color: #9ca3af;
             font-size: 0.85rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .req {
@@ -75,10 +75,10 @@
 
     <div class="form-container">
 
-        <h2 class="text-3xl text-blue-500 mb-2">Nuevo héroe</h2>
+        <h2 class="text-2xl text-blue-500 mb-2">Agregar nuevo Superhéroe</h2>
         <p class="form-hint">Campos obligatorios <span class="req">*</span></p>
 
-        <form id="add-superhero-form" action="/api/heroes/agregar" method="POST" autocomplete="off">
+        <form id="add-superhero-form" autocomplete="off">
 
             <%- include("partials/superheroForm.ejs", { superheroe: { nombreSuperheroe: '' , nombreReal: '' , edad: '' ,
                 planetaOrigen: '' , creador: '' , debilidad: '' , poderes: '' , aliados: '' , enemigos: '' } }) %>
@@ -93,7 +93,6 @@
     </div>
 
     <script>
-        /* Validación de los campos requeridos en el cliente */
         document.addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("#add-superhero-form");
             form.addEventListener("submit", async (e) => {
@@ -107,7 +106,7 @@
                 const creador = document.querySelector('input[name="creador"]').value.trim();
                 const debilidad = document.querySelector('input[name="debilidad"]').value.trim();
 
-                const poderes = document.querySelector('input[name="poderes"]').value.split(",").map(item => item.trim());
+                const poderes = document.querySelector('input[name="poderes"]').value.split(",").map(item => item.trim()).filter(Boolean);
                 const aliados = document.querySelector('input[name="aliados"]').value.split(",").map(item => item.trim()).filter(Boolean);
                 const enemigos = document.querySelector('input[name="enemigos"]').value.split(",").map(item => item.trim()).filter(Boolean);
 
@@ -142,7 +141,7 @@
                     errors.push("El campo poderes no puede quedar vacío");
                 } else {
                     poderes.forEach(poder => {
-                        if (!isNaN(poder)) { // Validar que cada elemento se uns string 
+                        if (!isNaN(poder)) { 
                             errors.push("Cada poder deber ser un texto");
                         } else if (poder.length < 3) {
                             errors.push("Cada poder debe tener almenos 3 caracteres");
@@ -154,7 +153,7 @@
                 
                 // Si hubo errores de validación mostrar los errores con un alert
                 if (errors.length > 0) {
-                    alert(errors.join("\n"));
+                    alert("Por favor corregir:\n" + errors.join("\n"));
                     return;
                 }
 

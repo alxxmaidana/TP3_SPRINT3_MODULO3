@@ -45,10 +45,9 @@ export async function obtenerTodosLosSuperheroesController(req, res) {
 				message: "No hay superhéroes, la colección se encuentra vacía"
 			})
 		}
+		res.render("dashboard", { superheroes });
 		// const superheroeFormateados = renderizarlistaSuperheroes(superheroes);
 		// res.status(200).json(superheroeFormateados);
-		// Pasamos el array de superhéroes para que la vista los renderize
-		res.render("dashboard", { superheroes });
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al obtener todos los superhéroes",
@@ -117,7 +116,7 @@ export async function agregarSuperheroeController(req, res) {
 	try {
 		const nuevoSuperheroe = new Superhero(req.body);
 		await agregarNuevoSuperheroe(nuevoSuperheroe)
-		res.status(200).json({redirectTo: "/api/heroes"});
+		res.status(200).json({ redirectTo: "/api/heroes" });
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al agregar el nuevo superheroe",
@@ -158,8 +157,7 @@ export async function eliminarSuperheroeController(req, res) {
 export async function eliminarSuperheroePorNombreController(req, res) {
 	try {
 		const { nombreSuperheroe } = req.params;
-		const superheroeEliminado =
-			await eliminarSuperheroePorNombre(nombreSuperheroe);
+		const superheroeEliminado = await eliminarSuperheroePorNombre(nombreSuperheroe);
 		if (!superheroeEliminado) {
 			return res.status(404).send({
 				mesagge: `El superhéroe ${nombreSuperheroe} no existe, no se puede eliminar`,

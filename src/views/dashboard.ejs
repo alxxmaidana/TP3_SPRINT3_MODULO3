@@ -7,7 +7,6 @@
     <!-- Tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <title>Superhéroes</title>
@@ -45,24 +44,23 @@
 
 <body class="px-6 py-8">
 
-    <header class="mb-10 flex justify-between items-center border-b border-neutral-800 pb-4">
+    <header class="mb-10 flex justify-between items-center border-b border-neutral-800 pb-4 w-[80%] mx-auto">
         <div>
-            <h1 class="text-4xl text-blue-500">Heroes Database</h1>
-            <p class="text-neutral-400 text-sm">Panel de control</p>
+            <h1 class="text-4xl text-blue-500">TP 3 - Sprint 3</h1>
+            <p class="text-neutral-400 text-sm">Métodos CRUD con colección de Superhéroes</p>
         </div>
 
-        <form action="/api/heroes/agregar" method="GET">
-            <button type="submit" class="btn-primary">
-                + Nuevo héroe
-            </button>
-        </form>
+        <a href="/api/heroes/agregar" type="submit" class="btn-primary">
+            + Nuevo héroe
+        </a>
     </header>
 
-    <div class="cards-grid">
+    <div class="cards-grid w-[80%] mx-auto">
 
         <% superheroes.forEach(heroe => { %>
             <%- include("./partials/superheroCards.ejs", { heroe }) %>
         <% }); %>
+
     </div>
 
     <script>
