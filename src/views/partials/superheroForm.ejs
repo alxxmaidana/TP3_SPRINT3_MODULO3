@@ -2,8 +2,8 @@
     fieldset {
         border: 1px solid #262626;
         border-radius: 0.75rem;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
+        padding: .7rem 1rem;
+        margin-bottom: .75rem;
     }
 
     legend {
@@ -25,6 +25,7 @@
     }
 
     label {
+        margin-top: .5rem;
         font-size: 0.85rem;
         color: #9ca3af;
     }
@@ -56,19 +57,19 @@
     <legend>Identidad</legend>
     <div class="grid-2">
         <div class="field">
-            <label>Nombre de superhéroe *</label>
+            <label>Nombre de superhéroe <span class="req">*</span></label>
             <input type="text" name="nombreSuperheroe" value="<%= superheroe.nombreSuperheroe %>">
         </div>
 
         <div class="field">
-            <label>Nombre real *</label>
+            <label>Nombre real <span class="req">*</span></label>
             <input type="text" name="nombreReal" value="<%= superheroe.nombreReal %>">
         </div>
     </div>
 
     <div class="grid-2">
         <div class="field">
-            <label>Edad</label>
+            <label>Edad <span class="req">*</span></label>
             <input type="number" name="edad" value="<%= superheroe.edad %>">
         </div>
 
@@ -94,7 +95,7 @@
     </div>
 
     <div class="field">
-        <label>Poderes</label>
+        <label>Poderes <span class="req">*</span></label>
         <input type="text" name="poderes" value="<%= superheroe.poderes %>">
         <small>Separar con comas</small>
     </div>
@@ -107,10 +108,12 @@
     <div class="field">
         <label>Aliados</label>
         <input type="text" name="aliados" value="<%= superheroe.aliados %>">
+        <small>Separar por comas</small>
     </div>
 
     <div class="field">
         <label>Enemigos</label>
         <input type="text" name="enemigos" value="<%= superheroe.enemigos %>">
+        <small>Separar por comas</small>
     </div>
 </fieldset>

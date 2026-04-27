@@ -11,6 +11,6 @@ export async function connectDB() {
 		console.log("Conexión éxitosa a la base de datos");
 	} catch (err) {
 		console.error("Error al conectar a la base de datos MongoDB", err);
-		throw err; // Detiene la ejecución del programa en este punto
+		throw err;
 	}
 }

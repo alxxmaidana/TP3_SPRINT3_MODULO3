@@ -16,7 +16,6 @@ class SuperheroRepository extends IRepository {
 	// BUSCAR POR ATRIBUTO Y VALOR
 	async buscarPorAtributo(atributo, valor) {
 		return await Superhero.find({ [atributo]: valor });
-		// El uso de corchetes permite acceder a la propiedad del objeto utilizando el valor de la variable "atributo".
 	}
 
 	// OBTENER MAYORES DE 30
@@ -41,7 +40,6 @@ class SuperheroRepository extends IRepository {
 		return await Superhero.findOneAndDelete({
 			nombreSuperheroe: nombreSuperheroe,
 		});
-		// Retorna el documento eliminado 
 	}
 
 	// ELIMINAR SUPERHÉROE POR ID
@@ -52,7 +50,7 @@ class SuperheroRepository extends IRepository {
 	// ACTUALIZAR SUPERHÉROE
 	async actualizarSuperheroe(id, datosActualizados) {
 		return await Superhero.findByIdAndUpdate(id, datosActualizados, {
-			returnDocument: "after" // Retorna el documento despues de la actualización
+			returnDocument: "after"
 		});
 	}
 }
