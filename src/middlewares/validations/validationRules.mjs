@@ -2,7 +2,7 @@ import { body } from "express-validator";
 import { obtenerTodosLosSuperheroes } from "../../services/superheroService.mjs";
 
 export const superheroValidations = [
-  // nombreSuperheroe
+  // Validaciones requeridas
   body("nombreSuperheroe")
     .trim() // Eliminar espacios al inicio y al final
     .notEmpty().withMessage("El nombre del superhéroe es requerido.") // Validar que el campo no esté vacío
@@ -27,60 +27,50 @@ export const superheroValidations = [
     })
     .escape(),
   body("poderes")
-    .isArray({ min: 1 }).withMessage("Los poderes son requeridos."), // Valida que poderes tenga almenos un elemento
+    .isArray({ min: 1 }).withMessage("Poderes debe ser un array de almenos un elemento"), // Valida que poderes tenga almenos un elemento
   body("poderes.*")
+    .isString().withMessage("Poderes debe ser un array de strings") // Valida que se un array de strings
     .trim()
     .isLength({ min: 3 }).withMessage("Cada poder debe tener al menos 3 caracteres.")
     .isLength({ max: 60 }).withMessage("Cada poder no puede superar los 60 caracteres.")
-    .custom((value) =>  {
-      if (/^[^\w\s]+$/.test(value) || /^\d+$/.test(value)) {
-        throw new Error("Cada poder deber ser un texto");
-      }
-      return true;
-    })
     .escape(),
 
   // Validaciones para los campos opcionales
-  body("planetaOrigen")
-    .optional()
-    .trim()
-    .isLength({ min: 3 }).withMessage("El planeta de origen debe tener al menos 3 caracteres.")
-    .isLength({ max: 60 }).withMessage("El planeta de origen no puede superar los 60 caracteres.")
-    .escape(),
-  body("debilidad")
-    .optional()
-    .trim()
-    .isLength({ min: 3 }).withMessage("La debilidad debe tener almenos 3 carácteres.")
-    .isLength({ max: 60 }).withMessage("La debilidad no puede superar los 60 caracteres.")
-    .escape(),
-  body("creador")
-    .optional()
-    .trim()
-    .isLength({ min: 3 }).withMessage("El creador debe tener almenos 3 carácteres.")
-    .isLength({ max: 60 }).withMessage("El creador no puede superar los 60 caracteres.")
-    .escape(),
-  body("aliados.*")
-    .optional()
-    .trim()
-    .isLength({ min: 3 }).withMessage("Cada aliado debe tener al menos 3 caracteres.")
-    .isLength({ max: 60 }).withMessage("Cada aliado no puede superar los 60 caracteres.")
-    .custom((value) =>  {
-      if (/^[^\w\s]+$/.test(value) || /^\d+$/.test(value)) {
-        throw new Error("Cada aliado deber ser un texto");
-      }
-      return true;
-    })
-    .escape(),
-  body("enemigos.*")
-    .optional()
-    .trim()
-    .isLength({ min: 3 }).withMessage("Cada enemigo debe tener al menos 3 caracteres.")
-    .isLength({ max: 60 }).withMessage("Cada enemigo no puede superar los 60 caracteres.")
-    .custom((value) =>  {
-      if (/^[^\w\s]+$/.test(value) || /^\d+$/.test(value)) {
-        throw new Error("Cada enemigo deber ser un texto");
-      }
-      return true;
-    })
-    .escape(),
+  // body("planetaOrigen")
+  //   .optional()
+  //   .trim()
+  //   .isLength({ min: 3 }).withMessage("El planeta de origen debe tener al menos 3 caracteres.")
+  //   .isLength({ max: 60 }).withMessage("El planeta de origen no puede superar los 60 caracteres.")
+  //   .escape(),
+  // body("debilidad")
+  //   .optional()
+  //   .trim()
+  //   .isLength({ min: 3 }).withMessage("La debilidad debe tener almenos 3 carácteres.")
+  //   .isLength({ max: 60 }).withMessage("La debilidad no puede superar los 60 caracteres.")
+  //   .escape(),
+  // body("creador")
+  //   .optional()
+  //   .trim()
+  //   .isLength({ min: 3 }).withMessage("El creador debe tener almenos 3 carácteres.")
+  //   .isLength({ max: 60 }).withMessage("El creador no puede superar los 60 caracteres.")
+  //   .escape(),
+  // body("aliados")
+  //   .optional()
+  //   .isArray({ min: 1 }).withMessage("aliados debe ser un array de almenos un elemento"),
+  // body("aliados.*")
+  //   .optional()
+  //   .isString().withMessage("Aliados debe ser una array de strings")
+  //   .trim()
+  //   .isLength({ min: 3 }).withMessage("Cada aliado debe tener al menos 3 caracteres.")
+  //   .isLength({ max: 60 }).withMessage("Cada aliado no puede superar los 60 caracteres.")
+  //   .escape(),
+  // body("enemigos")
+  //   .optional()
+  //   .isArray({ min: 1 }).withMessage("enemigos debe ser un array de almenos un elemento"),
+  // body("enemigos.*")
+  //   .optional()
+  //   .isString().withMessage("enemigos de ser un array de strings")
+  //   .trim()
+  //   .isLength({ min: 3 }).withMessage("Cada enemigo debe tener al menos 3 caracteres.")
+  //   .isLength({ max: 60 }).withMessage("Cada enemigo no puede superar los 60 caracteres.")
   ];

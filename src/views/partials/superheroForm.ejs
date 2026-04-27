@@ -42,7 +42,7 @@
     input:focus {
         outline: none;
         border-color: #2563eb;
-        box-shadow: 0 0 6px rgba(37,99,235,0.5);
+        box-shadow: 0 0 6px rgba(37, 99, 235, 0.5);
     }
 
     small {
@@ -54,38 +54,33 @@
 <!-- IDENTIDAD -->
 <fieldset>
     <legend>Identidad</legend>
-
     <div class="grid-2">
         <div class="field">
             <label>Nombre de superhéroe *</label>
-            <input type="text" name="nombreSuperheroe"
-                value="<%= superheroe.nombreSuperheroe %>" required minlength="3" maxlength="60">        </div>
+            <input type="text" name="nombreSuperheroe" value="<%= superheroe.nombreSuperheroe %>">
+        </div>
 
         <div class="field">
             <label>Nombre real *</label>
-            <input type="text" name="nombreReal"
-                value="<%= superheroe.nombreReal %>" required minlength="3" maxlength="60">
+            <input type="text" name="nombreReal" value="<%= superheroe.nombreReal %>">
         </div>
     </div>
 
     <div class="grid-2">
         <div class="field">
             <label>Edad</label>
-            <input type="number" name="edad"
-                value="<%= superheroe.edad %>" required>
+            <input type="number" name="edad" value="<%= superheroe.edad %>">
         </div>
 
         <div class="field">
             <label>Planeta</label>
-            <input type="text" name="planetaOrigen"
-                value="<%= superheroe.planetaOrigen %>">
+            <input type="text" name="planetaOrigen" value="<%= superheroe.planetaOrigen %>">
         </div>
     </div>
 
     <div class="field">
         <label>Creador</label>
-        <input type="text" name="creador"
-            value="<%= superheroe.creador %>">
+        <input type="text" name="creador" value="<%= superheroe.creador %>">
     </div>
 </fieldset>
 
@@ -95,14 +90,12 @@
 
     <div class="field">
         <label>Debilidad</label>
-        <input type="text" name="debilidad"
-            value="<%= superheroe.debilidad %>">
+        <input type="text" name="debilidad" value="<%= superheroe.debilidad %>">
     </div>
 
     <div class="field">
         <label>Poderes</label>
-        <input type="text" name="poderes"
-            value="<%= superheroe.poderes %>" required>
+        <input type="text" name="poderes" value="<%= superheroe.poderes %>">
         <small>Separar con comas</small>
     </div>
 </fieldset>
@@ -113,13 +106,11 @@
 
     <div class="field">
         <label>Aliados</label>
-        <input type="text" name="aliados"
-            value="<%= superheroe.aliados %>">
+        <input type="text" name="aliados" value="<%= superheroe.aliados %>">
     </div>
 
     <div class="field">
         <label>Enemigos</label>
-        <input type="text" name="enemigos"
-            value="<%= superheroe.enemigos %>">
+        <input type="text" name="enemigos" value="<%= superheroe.enemigos %>">
     </div>
 </fieldset>

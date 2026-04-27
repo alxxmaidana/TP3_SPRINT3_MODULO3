@@ -25,7 +25,9 @@ export async function obtenerSuperheroePorIdController(req, res) {
 		if (superheroe === null) {
 			return res.status(404).send({ mesagge: "Superhéroe no encontrado" });
 		}
-		res.render("editSuperhero.ejs", { superheroe })
+		res.render("editSuperhero", { superheroe })
+		// const superheroeFormateado = renderizarSuperheroe(superheroe);
+		// res.status(200).json(superheroeFormateado);
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al buscar el superhéroe",
@@ -43,6 +45,8 @@ export async function obtenerTodosLosSuperheroesController(req, res) {
 				message: "No hay superhéroes, la colección se encuentra vacía"
 			})
 		}
+		// const superheroeFormateados = renderizarlistaSuperheroes(superheroes);
+		// res.status(200).json(superheroeFormateados);
 		// Pasamos el array de superhéroes para que la vista los renderize
 		res.render("dashboard", { superheroes });
 	} catch (err) {
@@ -97,7 +101,6 @@ export async function agregarNuevoSuperheroeController(req, res) {
 	try {
 		// Crear nuevo superhéroe a partir de los datos enviados en el body (Enviamos un JSON desde postman)
 		const nuevoSuperheroe = new Superhero(req.body);
-		// Agregar superhéroe a la DB
 		await agregarNuevoSuperheroe(nuevoSuperheroe);
 		const nuevoSuperheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
 		res.status(200).json(nuevoSuperheroeFormateado);
@@ -112,37 +115,9 @@ export async function agregarNuevoSuperheroeController(req, res) {
 // AGREGAR NUEVO SUPERHÉROE
 export async function agregarSuperheroeController(req, res) {
 	try {
-		// Destructuring para obtener los datos del cuerpo de la petición
-		// Asignamos valores por defecto para los campos no especificados en el formulario
-		// ...rest -> Agrupamos todos demás campo del req.body dentro del objeto rest
-		const {
-			planetaOrigen = "Desconocido",
-			debilidad = "No especificado",
-			creador = "Desconocido",
-			aliados = [],
-			enemigos = [],
-			nombreSuperheroe,
-			nombreReal,
-			edad,
-			poderes
-		} = req.body;
-
-		// Crear un nuevo superhéroe a partir del modelo
-		const nuevoSuperheroe = new Superhero({
-			nombreSuperheroe,
-			nombreReal,
-			edad,
-			poderes,
-			planetaOrigen,
-			debilidad,
-			creador,
-			aliados,
-			enemigos
-		});
-		// Agregar el nuevo superhéroe
-		await agregarNuevoSuperheroe(nuevoSuperheroe);
-		// Redireccionar al dashboard
-		res.redirect("/api/heroes");
+		const nuevoSuperheroe = new Superhero(req.body);
+		await agregarNuevoSuperheroe(nuevoSuperheroe)
+		res.status(200).json({redirectTo: "/api/heroes"});
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al agregar el nuevo superheroe",
@@ -157,7 +132,7 @@ export async function editarSuperheroeController(req, res) {
 	try {
 		const { id } = req.params;
 		await actualizarSuperheroePorId(id, req.body);
-		res.redirect("/api/heroes");
+		res.status(200).json({ redirectTo: "/api/heroes" });
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al actualizar el superhéroe",
@@ -170,7 +145,7 @@ export async function editarSuperheroeController(req, res) {
 export async function eliminarSuperheroeController(req, res) {
 	try {
 		await eliminarSuperheroePorId(req.params.id);
-		res.redirect("/api/heroes");
+		res.status(204).send(); 
 	} catch (error) {
 		res.status(500).send({
 			message: "Ocurrió un error al eliminar el Superhéroe",
